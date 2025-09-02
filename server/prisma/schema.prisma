@@ -138,11 +138,11 @@ model Webinar {
 }
 
 model WebinarApplication {
-  id        Int      @id @default(autoincrement())
+  id        Int           @id @default(autoincrement())
   webinarId Int
   userId    Int
-  status    String   @default("Applied")
-  createdAt DateTime @default(now())
+  status    WebinarStatus @default(Applied)
+  createdAt DateTime      @default(now())
 
   webinar Webinar @relation(fields: [webinarId], references: [id])
   user    User    @relation(fields: [userId], references: [id])
@@ -221,4 +221,10 @@ enum UserRole {
 enum BillingCycle {
   MONTHLY
   ANNUAL
+}
+
+enum WebinarStatus {
+  Applied
+  Paid
+  Confirmed
 }
